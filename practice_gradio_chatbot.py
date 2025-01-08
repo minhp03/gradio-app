@@ -5,6 +5,9 @@
 import gradio as gr
 import random
 from openai import OpenAI
+# adding code for running local lm via lM studio
+
+#client = OpenAI(base_url="http://localhost:1234/v1", api_key="lm-studio")
 
 client = OpenAI(
    
@@ -19,6 +22,14 @@ def chat_logic(message,chat_history):
     #link question of user and answer of bot.
     messages.append({"role":"user","content":message})
     #print(messages)
+    # running by local lm studio
+
+#     chat_completion = client.chat.completions.create(
+#         model="your llm model if you want to run it locally",
+#         messages=messages,
+#         stream=True
+# )
+    chat_history.append([message,"loading..."])
 
     chat_completion = client.chat.completions.create(
       model="gpt-4o-mini",
